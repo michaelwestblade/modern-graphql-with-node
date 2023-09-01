@@ -1,10 +1,16 @@
-const {ApolloServer, gql} = require('apollo-server');
+const {ApolloServer} = require('apollo-server');
 const {typeDefs} = require('./schema');
-const {resolvers} = require('./resolvers');
+const {Query} = require('./resolvers/Query');
+const {Product} = require('./resolvers/Product');
+const {Category} = require('./resolvers/Category');
 
 const server = new ApolloServer({
   typeDefs,
-  resolvers
+  resolvers: {
+    Query,
+    Product,
+    Category
+  }
 });
 
 server.listen().then(({url}) => {

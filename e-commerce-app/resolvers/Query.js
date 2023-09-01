@@ -1,7 +1,7 @@
-const {products} = require('./products.json');
-const {categories} = require('./categories.json');
+const {products} = require('../products.json');
+const {categories} = require('../categories.json');
 
-const resolvers = {
+module.exports = {
   Query: {
     hello: () => {
       return 'Hello, world';
@@ -25,19 +25,5 @@ const resolvers = {
     product: (parent, args, context) => products.find(product => product.id == args.id),
     categories: (parent, args, context) => categories,
     category: (parent, args, context) => categories.find(category => category.id == args.id)
-  },
-  Category: {
-    products: (parent, args, context) => {
-      return products.filter(product => product.categoryId == parent.id)
-    }
-  },
-  Product: {
-    category: (parent, args, context) => {
-      return categories.find(category => category.id == parent.categoryId)
-    }
   }
-}
-
-module.exports = {
-  resolvers
 }
